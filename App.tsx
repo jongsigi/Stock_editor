@@ -42,6 +42,7 @@ const App: React.FC = () => {
   const handleClear = async () => {
     setFiles([]);
     await clearAllFilesFromDB();
+    setActiveTab('data'); // Reset to data management tab
   };
 
   const isReady = useMemo(() => {
@@ -77,7 +78,7 @@ const App: React.FC = () => {
             onClear={handleClear}
           />
         ) : (
-          <Dashboard files={files} />
+          <Dashboard files={files} onClear={handleClear} />
         )}
       </main>
 

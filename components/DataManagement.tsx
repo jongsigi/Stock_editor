@@ -59,6 +59,9 @@ const DataManagement: React.FC<Props> = ({ files, onUpload, onDelete, onClear })
       alert("파일 처리 중 오류가 발생했습니다.");
     } finally {
       setIsProcessing(false);
+      // Reset file input value to allow re-uploading the same file
+      const inputs = document.querySelectorAll('input[type="file"]');
+      inputs.forEach((input: any) => { input.value = ''; });
     }
   };
 
@@ -67,6 +70,12 @@ const DataManagement: React.FC<Props> = ({ files, onUpload, onDelete, onClear })
     [DataType.TOTAL_TRADE]: '2. 전체 거래대금',
     [DataType.FOREIGNER]: '3. 외국인 (f_)',
     [DataType.INSTITUTIONAL]: '4. 기관 (inst_)'
+  };
+
+  const handleGlobalClear = () => {
+    if (confirm('모든 데이터를 삭제하시겠습니까? 업로드된 모든 파일과 분석 데이터가 초기화됩니다.')) {
+      onClear();
+    }
   };
 
   return (
@@ -79,8 +88,8 @@ const DataManagement: React.FC<Props> = ({ files, onUpload, onDelete, onClear })
           </p>
         </div>
         <button 
-          onClick={() => { if(confirm('모든 데이터를 삭제하시겠습니까?')) onClear(); }}
-          className="px-4 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors text-sm font-semibold"
+          onClick={handleGlobalClear}
+          className="px-4 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors text-sm font-semibold border border-red-100"
         >
           전체 초기화
         </button>
