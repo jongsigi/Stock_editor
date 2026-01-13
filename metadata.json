@@ -1,0 +1,5 @@
+{
+  "name": "Copy of Stock Data Comprehensive Dashboard",
+  "description": "A high-performance React dashboard for analyzing stock transaction data, foreigner/institutional trades, and selected stock snapshots using SheetJS and Recharts.",
+  "requestFramePermissions": []
+}
